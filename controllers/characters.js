@@ -104,11 +104,12 @@ characterRouter.post('/', async (request, response) => {
         }).end()
     }
     console.log(fileName)
-    console.log(fileName.split('.').at(-1))
+    console.log(fileName.split('.')[fileName.split('.').length-1])
     try {
         
-        if (fileName.split('.').at(-1) !== "png"
-            && fileName.split('.').at(-1) !== "jpg" && fileName.split('.').at(-1) !== "jpeg") {
+        if (fileName.split('.')[fileName.split('.').length-1] !== "png"
+            && fileName.split('.')[fileName.split('.').length-1] !== "jpg" 
+            && fileName.split('.')[fileName.split('.').length-1] !== "jpeg") {
             return response.status(400).json({
                 error: 'Formato incorrecto de imagen'
             }).end()
