@@ -71,7 +71,7 @@ characterRouter.post('/', async (request, response) => {
         descripcion, region, habilidad1, descripcion1,
         habilidad2, descripcion2, habilidad3, descripcion3, token } = request.body
     const newPath = "public/imagenes/personajes/";
-    if(token!==TOKEN){
+    if (token !== TOKEN) {
         return response.status(401).json({
             error: 'No estas autorizado a crear un personaje'
         }).end()
@@ -103,21 +103,28 @@ characterRouter.post('/', async (request, response) => {
             error: 'Falta un elemento por rellenar'
         }).end()
     }
+    try {
+        console.log(fileName)
+        if (fileName.split('.').at(-1) !== "png"
+            && fileName.split('.').at(-1) !== "jpg" && fileName.split('.').at(-1) !== "jpeg") {
+            return response.status(400).json({
+                error: 'Formato incorrecto de imagen'
+            }).end()
+        }
 
-    if (fileName.split('.').at(-1) !== "png"
-        && fileName.split('.').at(-1) !== "jpg" && fileName.split('.').at(-1) !== "jpeg") {
+        file.mv(`${newPath}${fileName}`, (err) => {
+            if (err) {
+                return response.status(500).json({
+                    error: 'No se pudo guardar la imagen'
+                }).end()
+            }
+        });
+    } catch (error) {
         return response.status(400).json({
-            error: 'Formato incorrecto de imagen'
+            error: 'Ha habido un problema a la hora de procesar la imagen'
         }).end()
     }
 
-    file.mv(`${newPath}${fileName}`, (err) => {
-        if (err) {
-            return response.status(500).json({
-                error: 'No se pudo guardar la imagen'
-            }).end()
-        }
-    });
 
     //Creamos el nuevo personajes con los atributos proporcionados
     try {
@@ -139,8 +146,8 @@ characterRouter.post('/', async (request, response) => {
 })
 
 characterRouter.delete('/', (request, response) => {
-    const {nombre, token } = request.body
-    if(token!==TOKEN){
+    const { nombre, token } = request.body
+    if (token !== TOKEN) {
         return response.status(401).json({
             error: 'No estas autorizado a crear un personaje'
         }).end()
