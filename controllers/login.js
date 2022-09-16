@@ -3,8 +3,12 @@ const loginRouter = require('express').Router()
 const User = require('../models/User')
 
 loginRouter.post('/', async (request, response) => {
+    console.log("Intentando loguearse")
     const { body } = request
     const { username, password, token } = body
+    console.log("Username: ",username)
+    console.log("Password: ",password)
+    console.log("Token: ",token)
     if(token!==TOKEN){
         return response.status(401).json({
             error: 'No estas autorizado a loguear un usuario'
