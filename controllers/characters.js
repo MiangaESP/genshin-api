@@ -103,8 +103,9 @@ characterRouter.post('/', async (request, response) => {
             error: 'Falta un elemento por rellenar'
         }).end()
     }
+    console.log(fileName)
     try {
-        console.log(fileName)
+        
         if (fileName.split('.').at(-1) !== "png"
             && fileName.split('.').at(-1) !== "jpg" && fileName.split('.').at(-1) !== "jpeg") {
             return response.status(400).json({
