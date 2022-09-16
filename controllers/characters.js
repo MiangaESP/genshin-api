@@ -104,6 +104,7 @@ characterRouter.post('/', async (request, response) => {
         }).end()
     }
     console.log(fileName)
+    console.log(fileName.split('.').at(-1))
     try {
         
         if (fileName.split('.').at(-1) !== "png"
@@ -115,12 +116,15 @@ characterRouter.post('/', async (request, response) => {
 
         file.mv(`${newPath}${fileName}`, (err) => {
             if (err) {
+                
                 return response.status(500).json({
                     error: 'No se pudo guardar la imagen'
                 }).end()
             }
         });
     } catch (error) {
+        console.log(error)
+        console.log(error.name)
         return response.status(400).json({
             error: 'Ha habido un problema a la hora de procesar la imagen'
         }).end()
