@@ -13,9 +13,6 @@ usersRouter.post('/', async (request, response) => {
     try {
         const { body } = request
         const { username, password, token } = body
-        console.log("Username: ", username)
-        console.log("Password: ", password)
-        console.log("Token: ", token)
         if (token !== TOKEN) {
             return response.status(401).json({
                 error: 'No estas autorizado a crear un personaje'

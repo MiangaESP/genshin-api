@@ -11,7 +11,7 @@ weaponRouter.get('/', async (request, response) => {
 
 weaponRouter.get('/random', async (request, response) => {
     const weapons = await Weapon.find({})
-    const randomWeapon = weapons[Math.floor(Math.random()*weapons.length)]
+    const randomWeapon = weapons[Math.floor(Math.random() * weapons.length)]
     response.json(randomWeapon)
 })
 
@@ -57,11 +57,11 @@ weaponRouter.get('/:nombre', async (request, response) => {
 
 //Crea una nueva arma
 weaponRouter.post('/', async (request, response) => {
-    const { nombre, tipo, rareza, stat_secundario, 
-            descripcion, ataque_basico, efecto_pasivo, token } = request.body
+    const { nombre, tipo, rareza, stat_secundario,
+        descripcion, ataque_basico, efecto_pasivo, token } = request.body
     const newPath = "public/imagenes/armas/";
 
-    if(token!==TOKEN){
+    if (token !== TOKEN) {
         return response.status(401).json({
             error: 'No estas autorizado a crear un personaje'
         }).end()
@@ -70,37 +70,44 @@ weaponRouter.post('/', async (request, response) => {
     const file = request.files.file;
     const fileName = file.name;
     //Miramos que todos los campos hayan sido rellenados
-    if (!nombre || !tipo || !rareza || !stat_secundario 
+    if (!nombre || !tipo || !rareza || !stat_secundario
         || !descripcion || !ataque_basico || !efecto_pasivo
         || !file || !fileName) {
         return response.status(400).json({
             error: 'Falta un elemento por rellenar'
         })
     }
-    if(isNaN(ataque_basico)){
+    if (isNaN(ataque_basico)) {
         return response.status(400).json({
             error: 'El ataque basico debe ser un valor numerico'
         })
     }
-    if(fileName.split('.').at(-1)!== "png" 
-    && fileName.split('.').at(-1)!== "jpg" && fileName.split('.').at(-1)!== "jpeg"){
-        return response.status(400).json({
-            error: 'Formato incorrecto de imagen'
-        }).end()
-    }
-
-    file.mv(`${newPath}${fileName}`, (err) => {
-        if (err) {
-            return response.status(500).json({
-                error: 'No se pudo guardar la imagen'
+    try {
+        if (fileName.split('.')[fileName.split('.').length - 1] !== "png"
+            && fileName.split('.')[fileName.split('.').length - 1] !== "jpg"
+            && fileName.split('.')[fileName.split('.').length - 1] !== "jpeg") {
+            return response.status(400).json({
+                error: 'Formato incorrecto de imagen'
             }).end()
         }
-    });
+
+        file.mv(`${newPath}${fileName}`, (err) => {
+            if (err) {
+                return response.status(500).json({
+                    error: 'No se pudo guardar la imagen'
+                }).end()
+            }
+        });
+    } catch (error) {
+        return response.status(400).json({
+            error: 'Ha habido un problema a la hora de procesar la imagen'
+        }).end()
+    }
 
     //Creamos la nueva arma con los atributos proporcionados
     try {
         const newWeapon = new Weapon({
-            nombre, tipo, rareza, stat_secundario, descripcion, ataque_basico, 
+            nombre, tipo, rareza, stat_secundario, descripcion, ataque_basico,
             img: `/imagenes/armas/${fileName}`, efecto_pasivo
         })
         //Guardamos el arma en la BBDD y la devolvemos en el response
@@ -108,7 +115,7 @@ weaponRouter.post('/', async (request, response) => {
         response.json(newWeapon)
     } catch (error) {
         //Si la clave unica esta duplicada, devolvemos error
-        if (error.name === "ValidationError" || error.name==="Character validation failed") {
+        if (error.name === "ValidationError" || error.name === "Character validation failed") {
             return response.status(400).json({
                 error: 'Esta arma ya existe'
             }).end()
@@ -118,9 +125,9 @@ weaponRouter.post('/', async (request, response) => {
 })
 
 //Boramos una arma dado un nombre
-weaponRouter.delete('/', (request, response,next) => {
-    const {nombre, token } = request.body
-    if(token!==TOKEN){
+weaponRouter.delete('/', (request, response, next) => {
+    const { nombre, token } = request.body
+    if (token !== TOKEN) {
         return response.status(401).json({
             error: 'No estas autorizado a crear un arma'
         }).end()

@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Simple API with some Genshin content",
   "main": "index.js",
+  "engines":{
+    "npm": "8.0.0"
+  },
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "build": "cross-env NODE_ENV=production node build",

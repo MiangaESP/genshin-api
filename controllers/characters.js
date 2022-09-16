@@ -103,8 +103,6 @@ characterRouter.post('/', async (request, response) => {
             error: 'Falta un elemento por rellenar'
         }).end()
     }
-    console.log(fileName)
-    console.log(fileName.split('.')[fileName.split('.').length-1])
     try {
         
         if (fileName.split('.')[fileName.split('.').length-1] !== "png"
@@ -124,8 +122,6 @@ characterRouter.post('/', async (request, response) => {
             }
         });
     } catch (error) {
-        console.log(error)
-        console.log(error.name)
         return response.status(400).json({
             error: 'Ha habido un problema a la hora de procesar la imagen'
         }).end()
