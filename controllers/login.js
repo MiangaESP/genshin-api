@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const loginRouter = require('express').Router()
 const User = require('../models/User')
+const { TOKEN } = process.env
 
 loginRouter.post('/', async (request, response) => {
     console.log("Intentando loguearse")

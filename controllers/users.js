@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/User')
+const { TOKEN } = process.env
 
 
 usersRouter.get('/', async (request, response) => {
