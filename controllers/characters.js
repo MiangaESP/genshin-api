@@ -115,7 +115,6 @@ characterRouter.post('/', async (request, response) => {
 
         file.mv(`${newPath}${fileName}`, (err) => {
             if (err) {
-                
                 return response.status(500).json({
                     error: 'No se pudo guardar la imagen'
                 }).end()
