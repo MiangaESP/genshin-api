@@ -70,7 +70,7 @@ characterRouter.post('/', async (request, response) => {
     const { nombre, arma, rareza, elemento,
         descripcion, region, habilidad1, descripcion1,
         habilidad2, descripcion2, habilidad3, descripcion3, token } = request.body
-    const newPath = "public/imagenes/personajes/";
+    const newPath = "./public/imagenes/personajes/";
     if (token !== TOKEN) {
         return response.status(401).json({
             error: 'No estas autorizado a crear un personaje'
@@ -112,14 +112,15 @@ characterRouter.post('/', async (request, response) => {
                 error: 'Formato incorrecto de imagen'
             }).end()
         }
-
-        file.mv(`${newPath}${fileName}`, (err) => {
+        console.log(fileName)
+        await file.mv(`${newPath}${fileName}`, (err) => {
             if (err) {
                 return response.status(500).json({
                     error: 'No se pudo guardar la imagen'
                 }).end()
             }
         });
+        console.log("Se ha guardado la imagen en teoria")
     } catch (error) {
         return response.status(400).json({
             error: 'Ha habido un problema a la hora de procesar la imagen'
