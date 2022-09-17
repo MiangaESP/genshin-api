@@ -59,7 +59,7 @@ weaponRouter.get('/:nombre', async (request, response) => {
 weaponRouter.post('/', async (request, response) => {
     const { nombre, tipo, rareza, stat_secundario,
         descripcion, ataque_basico, efecto_pasivo, token } = request.body
-    const newPath = "public/imagenes/armas/";
+    const newPath = "https://genshin-api-mx5a.onrender.com/imagenes/armas/";
 
     if (token !== TOKEN) {
         return response.status(401).json({

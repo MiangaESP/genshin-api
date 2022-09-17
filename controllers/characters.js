@@ -70,7 +70,7 @@ characterRouter.post('/', async (request, response) => {
     const { nombre, arma, rareza, elemento,
         descripcion, region, habilidad1, descripcion1,
         habilidad2, descripcion2, habilidad3, descripcion3, token } = request.body
-    const newPath = "./public/imagenes/personajes/";
+    const newPath = "https://genshin-api-mx5a.onrender.com/imagenes/personajes/";
     if (token !== TOKEN) {
         return response.status(401).json({
             error: 'No estas autorizado a crear un personaje'
