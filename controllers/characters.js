@@ -70,7 +70,7 @@ characterRouter.post('/', async (request, response) => {
     const { nombre, arma, rareza, elemento,
         descripcion, region, habilidad1, descripcion1,
         habilidad2, descripcion2, habilidad3, descripcion3, token } = request.body
-    const newPath = "https://genshin-api-mx5a.onrender.com/imagenes/personajes/";
+    const newPath = "public/imagenes/personajes/";
     if (token !== TOKEN) {
         return response.status(401).json({
             error: 'No estas autorizado a crear un personaje'
@@ -113,7 +113,7 @@ characterRouter.post('/', async (request, response) => {
             }).end()
         }
         console.log(fileName)
-        await file.mv(`${newPath}${fileName}`, (err) => {
+        file.mv(`${newPath}${fileName}`, (err) => {
             if (err) {
                 return response.status(500).json({
                     error: 'No se pudo guardar la imagen'
