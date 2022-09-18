@@ -4,6 +4,7 @@ API for my own Genshin app. Using NodeJS, Express and MongoDB(Mongoose)
 The API is hosted at: https://genshin-api-mx5a.onrender.com/
 
 Web APP is hosted at: https://lucky-dango-625f64.netlify.app/
+
 Also, if you want to check genshin-app github, you can find it at: https://github.com/MiangaESP/genshin-app
 
 Both of them are mainly written in spanish.
