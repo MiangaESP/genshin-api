@@ -1,4 +1,4 @@
-# genshin-api
+# Genshin API
 API for my own Genshin app. Using NodeJS, Express and MongoDB(Mongoose)
 
 The API is hosted at: https://genshin-api-mx5a.onrender.com/
@@ -9,7 +9,7 @@ Also, if you want to check genshin-app github, you can find it at: https://githu
 
 Both of them are mainly written in spanish.
 
-ESP
+## ESP
 
 Esta API proporciona datos sobre el videojuego Genshin Impact, siendo estos datos algo reducidos con el fin de mostrar un ejemplo de entre todos los datos que se podrían almacenar.
 
@@ -19,7 +19,7 @@ Dado que esta API se ha creado principalmente para ser utilizada como backend pa
 
 Dentro de la raíz de la web donde se encuentra hosteada la API, se muestran todas aquellas rutas para hacer las peticiones y obtener los datos.
 
-ENG 
+## ENG 
 
 This API provides data about the Genshin Impact videogame, this data is reduced in order to show an example of all the data that could be stored.
 
